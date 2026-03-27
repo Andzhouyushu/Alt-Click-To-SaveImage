@@ -1,5 +1,5 @@
-# Alt-Click-
-这是一个EDGE浏览器插件，可以在网页中按住Alt+鼠标单击保存你喜欢的图片到指定文件夹中。
+# Alt-Click图片保存器
+这是一个EDGE浏览器插件
 
 #🖱️ Alt+Click 图片保存器（快速存图工具）
 
@@ -59,16 +59,16 @@
 ---
 
 ## 🛠️ 技术架构
+**数据流向：**  
+`content.js` → `background.js` → `offscreen.html` → `background.js` → 下载完成
 
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   content.js    │────▶│  background.js   │────▶│  offscreen.html │
-│  (页面脚本)      │     │  (Service Worker)│     │  (离屏文档)      │
-│  监听 Alt+点击   │     │  协调下载流程     │     │  获取跨域图片    │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-│                       │                          │
-▼                       ▼                          ▼
-显示十字光标            调用 downloads API           fetch 图片数据
-添加紫色边框            显示缩略图通知                转 Base64
+**各模块职责：**
+
+| 文件 | 职责 |
+|------|------|
+| **content.js** | 监听 Alt+点击，显示十字光标和紫色边框 |
+| **background.js** | 协调下载流程，调用 downloads API |
+| **offscreen.html** | 获取跨域图片，转为 Base64 |
 
 ### 核心技术点
 
@@ -82,22 +82,39 @@
 
 ## 📂 文件结构
 save-image-extension/
+
 ├── manifest.json          # 扩展配置文件
+
 ├── background.js          # 后台 Service Worker
+
 ├── content.js             # 内容脚本（页面注入）
+
 ├── offscreen.html         # 离屏文档 HTML
+
 ├── offscreen.js           # 离屏文档脚本
+
 ├── popup.html             # 弹出窗口界面
+
 ├── popup.js               # 弹出窗口逻辑
+
 ├── thumbnail.html         # 缩略图提示窗口（已删除）
+
 ├── thumbnail.js           # 缩略图逻辑（已删除）
+
 ├── styles/
+
 │   └── content.css        # 页面注入样式
+
 ├── icons/                 # 图标文件夹
+
 │   ├── icon16.png
+
 │   ├── icon32.png
+
 │   ├── icon48.png
+
 │   └── icon128.png
+
 └── README.md              # 本文件
 
 
