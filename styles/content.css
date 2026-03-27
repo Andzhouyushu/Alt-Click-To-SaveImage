@@ -1,0 +1,23 @@
+/* Alt 按下时的光标提示 */
+.alt-image-saver-active {
+  cursor: crosshair !important;
+}
+
+.alt-image-saver-active img {
+  cursor: crosshair !important;
+}
+
+/* 图片悬停效果 */
+.alt-image-saver-active img:hover {
+  outline: 3px solid #667eea !important;
+  outline-offset: 2px !important;
+  filter: brightness(1.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+/* 背景图片悬停 */
+.alt-image-saver-active [style*="background-image"]:hover {
+  outline: 3px solid #667eea !important;
+  outline-offset: 2px !important;
+  cursor: crosshair !important;
+}
